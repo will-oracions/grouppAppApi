@@ -2,7 +2,6 @@ import { Express, Request, Response } from "express";
 import swaggerJsdoc from "swagger-jsdoc";
 import swaggerUi from "swagger-ui-express"
 import {version} from "../../../package.json"
-import log from "./logger";
 
 const options: swaggerJsdoc.Options = {
     definition:{
@@ -40,7 +39,6 @@ function swaggerDocs(app: Express){
         res.setHeader('Content-Type', "application/json");
         res.send(swaggerSpec);
     });
-    log.info(`Documentation available`)
 }
 
 export default swaggerDocs;

@@ -1,6 +1,4 @@
 import express from "express";
-import config from "config";
-import logger from './utils/logger';
 import users from './routes/users.routes'
 import swaggerDocs from "./utils/swagger";
 import agents from "./routes/agents.routes";
