@@ -10,11 +10,10 @@ import residence from "./routes/residence.routes";
 import role from "./routes/role.routes";
 import vulnerabilite from "./routes/vulnerabilite.routes";
 
- const { sequelize, connect } = require("./utils/connect");
+const { sequelize, connect } = require("./utils/connect");
 let cors = require("cors");
+const port = 5000;
 const app = express();
-
-
 app.use(express.json());
 app.use(
   cors({
@@ -36,16 +35,18 @@ vulnerabilite(app);
 swaggerDocs(app);
 
 
-app.use("/", (req, res) => {
-  res.send(`api et la documentation se trouve <a href="/docs">ici</a>`);
-});
-app.use(({ res }) => {
-    res?.status(404).json({
-      message: "impossible de trouver la ressousrce demandé",
-    });
-  });
-
-console.log(`Server is running `);
+    app.use("/", (req, res) => {
+        res.send(`api ${port} et la documentation se trouve <a href="/docs">ici</a>`);
+      });
+      app.use(({ res }) => {
+          res?.status(404).json({
+            message: "impossible de trouver la ressousrce demandé",
+          });
+        });
+      
+      console.log(`Server is running at ${port}`);
+      
+      app.listen(port, () => console.log(`Server running on port ${port}`));
 
 
 
