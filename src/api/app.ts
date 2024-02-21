@@ -12,35 +12,48 @@ import residence from "./routes/residence.routes";
 import role from "./routes/role.routes";
 import vulnerabilite from "./routes/vulnerabilite.routes";
 
-
-
-const { sequelize, connect } = require("./utils/connect");
-
-var cors = require('cors')
-const port = config.get<number>('port');
+ const { sequelize, connect } = require("./utils/connect");
+let cors = require("cors");
+const port = 5000;
 const app = express();
-app.use(express.json())
-app.use(cors({
-    origin:'*'
-}))
 
-app.listen(port, async ()=>{
-    logger.info(`Server is running at http://localhost:${port}`);
 
-    await connect();
+app.use(express.json());
+app.use(
+  cors({
+    origin: "*",
+    methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
+    optionsSuccessStatus: 200,
+  })
+);
+connect();
+agents(app);
+communes(app);
+ ong(app);
+personnes(app);
+quartiers(app);
+residence(app);
+ role(app);
+vulnerabilite(app);
+ users(app);
+swaggerDocs(app, port);
 
-    agents(app);
-    communes(app);
-     ong(app);
-    personnes(app);
-    quartiers(app);
-    residence(app);
-     role(app);
-    vulnerabilite(app);
-     users(app);
 
-    swaggerDocs(app, port);
+app.use("/", (req, res) => {
+  res.send(`api ${port} et la documentation se trouve <a href="/docs">ici</a>`);
 });
+app.use(({ res }) => {
+    res?.status(404).json({
+      message: "impossible de trouver la ressousrce demandé",
+    });
+  });
+
+console.log(`Server is running at ${port}`);
+
+app.listen(port, () => console.log(`Server running on port ${port}`));
+
+
+
 
 
 
