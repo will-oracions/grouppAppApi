@@ -2,7 +2,7 @@
   "name": "GroupApp",
   "version": "1.0.0",
   "description": "it-grafik",
-  "main": "app.ts",
+  "main": "src/api/app.ts",
   "scripts": {
     "start": "ts-node-dev --respawn --transpile-only src/api/app.ts",
     "dev": "ts-node-dev --respawn --transpile-only src/api/app.ts",
