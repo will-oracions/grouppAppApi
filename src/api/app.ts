@@ -14,7 +14,6 @@ import vulnerabilite from "./routes/vulnerabilite.routes";
 
  const { sequelize, connect } = require("./utils/connect");
 let cors = require("cors");
-const port = 5000;
 const app = express();
 
 
@@ -36,11 +35,11 @@ residence(app);
  role(app);
 vulnerabilite(app);
  users(app);
-swaggerDocs(app, port);
+swaggerDocs(app);
 
 
 app.use("/", (req, res) => {
-  res.send(`api ${port} et la documentation se trouve <a href="/docs">ici</a>`);
+  res.send(`api et la documentation se trouve <a href="/docs">ici</a>`);
 });
 app.use(({ res }) => {
     res?.status(404).json({
@@ -48,9 +47,8 @@ app.use(({ res }) => {
     });
   });
 
-console.log(`Server is running at ${port}`);
+console.log(`Server is running `);
 
-app.listen(port, () => console.log(`Server running on port ${port}`));
 
 
 
