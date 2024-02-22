@@ -8,15 +8,21 @@ import { number, object, string, TypeOf } from "zod";
  *      type: object
  *      required:
  *        - libelle
+ *        - idCommunes
  *      properties:
  *        libelle:
  *          type: string
  *          default: "kwat"
+ *        idCommunes:
+ *          type: integer
+ *          default: 0
  *    CreateQuartierResponse:
  *      type: object
  *      properties:
  *        libelle:
  *          type: string
+ *        idCommunes:
+ *          type: integer
  *        id:
  *          type: string
  *        createdAt:
@@ -30,6 +36,9 @@ export const CreateQuartierSchema = object({
     libelle: string({
       required_error: "le libelle est obligatoire ",
     }),
+    idCommunes: string({
+      required_error: "la communes est obligatoire ",
+    })
 
   })
 

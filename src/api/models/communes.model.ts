@@ -30,8 +30,16 @@ const CommunesModel = sequelize.define("communes", {
     timestamps: true
 }
 );
-CommunesModel.hasMany(QuartiersModel, { foreignKey: 'idCommunes' });
-QuartiersModel.belongsTo(CommunesModel, { foreignKey: 'idCommunes' });
+CommunesModel.hasMany(QuartiersModel, { 
+    foreignKey: {
+        name: 'idCommunes',
+        allowNull: false,
+    }
+    });
+QuartiersModel.belongsTo(CommunesModel, {    foreignKey: {
+    name: 'idCommunes',
+    allowNull: false,
+}});
 (async () => {
   await sequelize.sync({ force: false });
   // Code here

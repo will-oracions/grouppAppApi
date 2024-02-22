@@ -1,3 +1,5 @@
+import PersonnesModel from "./personnes.model";
+import QuartiersModel from "./quartiers.model";
 
 const { Sequelize, Model, DataTypes } = require("sequelize");
 const { sequelize } = require("../utils/connect");
@@ -21,6 +23,18 @@ const ResidenceModel = sequelize.define("residence", {
     timestamps: true
 }
 );
+QuartiersModel.hasMany(ResidenceModel,{
+    foreignKey: {
+        name: 'idquartier',
+        allowNull: false,
+    }
+});
+ResidenceModel.belongsTo(QuartiersModel,{
+    foreignKey: {
+        name: 'idquartier',
+        allowNull: false,
+    }
+});
 
 (async () => {
   await sequelize.sync({ force: false });

@@ -20,6 +20,7 @@ const UtilisateursModel = sequelize.define("utilisateurs", {
     type: DataTypes.TEXT,
     allowNull: false,
   },
+
 },
   {
     tableName: "utilisateurs",
@@ -27,8 +28,18 @@ const UtilisateursModel = sequelize.define("utilisateurs", {
     timestamps: true
   }
 );
-RolesModel.hasMany(UtilisateursModel, { foreignKey: 'idrole' });
-UtilisateursModel.belongsTo(RolesModel, { foreignKey: 'idrole' });
+RolesModel.hasMany(UtilisateursModel, { 
+  foreignKey: {
+    name: 'idrole',
+    allowNull: false,
+}
+  });
+UtilisateursModel.belongsTo(RolesModel, { 
+  foreignKey: {
+    name: 'idrole',
+    allowNull: false,
+}
+  });
 (async () => {
   await sequelize.sync({ force: false });
   // Code here

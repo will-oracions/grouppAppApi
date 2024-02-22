@@ -1,4 +1,5 @@
 import AvoirVulnerabilite from "./avoirvulnerabilite.model";
+import ResidenceModel from "./residence.model";
 import RolesModel from "./roles.models";
 
 
@@ -53,18 +54,41 @@ const PersonnesModel = sequelize.define("personnes", {
         type: DataTypes.BOOLEAN,
         allowNull: false,
     },
+
 },
 {
     freezeTableName: true,
     timestamps: true
 }
 );
-PersonnesModel.hasMany(PersonnesModel, { foreignKey: 'Per_id' });
-PersonnesModel.belongsTo(PersonnesModel, { foreignKey: 'Per_id' });
+ResidenceModel.hasMany(PersonnesModel, { foreignKey: {
+    name: 'idresidence',
+    allowNull: false,
+} });
+PersonnesModel.belongsTo(ResidenceModel, { foreignKey: {
+    name: 'idresidence',
+    allowNull: false,
+} });
+PersonnesModel.hasMany(PersonnesModel, { 
+    foreignKey: {
+        name: 'Per_id',
+        allowNull: false,
+    }
+    });
+PersonnesModel.belongsTo(PersonnesModel, {     foreignKey: {
+        name: 'Per_id',
+        allowNull: false,
+    } });
 
+    PersonnesModel.hasMany(AvoirVulnerabilite, {     foreignKey: {
+        name: 'Per_id',
+        allowNull: false,
+    } });
+    AvoirVulnerabilite.belongsTo(PersonnesModel, {     foreignKey: {
+        name: 'Per_id',
+        allowNull: false,
+    } });
 
-PersonnesModel.hasMany(AvoirVulnerabilite, { foreignKey: 'Per_id' });
-AvoirVulnerabilite.belongsTo(PersonnesModel, { foreignKey: 'Per_id' });
 
 (async () => {
   await sequelize.sync({ force: false });

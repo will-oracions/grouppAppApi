@@ -28,8 +28,7 @@ const VulnerabiliteModel = sequelize.define("vulnerabilite", {
     timestamps: true
 }
 );
-VulnerabiliteModel.hasMany(AvoirVulnerabilite, { foreignKey: 'idvulnerabilte' });
-AvoirVulnerabilite.belongsTo(VulnerabiliteModel, { foreignKey: 'idvulnerabilte' });
+
 (async () => {
   await sequelize.sync({ force: false });
   // Code here

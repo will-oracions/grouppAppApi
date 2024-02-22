@@ -9,6 +9,7 @@ import quartiers from "./routes/quartiers.routes";
 import residence from "./routes/residence.routes";
 import role from "./routes/role.routes";
 import vulnerabilite from "./routes/vulnerabilite.routes";
+import avoir from "./routes/avoir.routes";
 
 const { sequelize, connect } = require("./utils/connect");
 let cors = require("cors");
@@ -17,21 +18,23 @@ const app = express();
 app.use(express.json());
 app.use(
   cors({
-    origin: "*",
+    origin: "*", 
     methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
     optionsSuccessStatus: 200,
   })
 );
 connect();
 agents(app);
+avoir(app);
 communes(app);
  ong(app);
 personnes(app);
-quartiers(app);
+quartiers(app); 
 residence(app);
  role(app);
 vulnerabilite(app);
  users(app);
+
 swaggerDocs(app);
 
 

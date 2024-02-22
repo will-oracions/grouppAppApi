@@ -11,7 +11,7 @@ const AgentsModel = sequelize.define("agents", {
     
     },
     nom: {
-        type: DataTypes.TEXT,
+        type: DataTypes.TEXT, 
         allowNull: false,
     },
     prenoms: {

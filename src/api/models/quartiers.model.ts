@@ -15,7 +15,7 @@ const QuartiersModel = sequelize.define("quartiers", {
     libelle: {
         type: DataTypes.TEXT,
         allowNull: false,
-    }
+    },
 
 
 },
@@ -24,8 +24,7 @@ const QuartiersModel = sequelize.define("quartiers", {
     timestamps: true
 }
 );
-QuartiersModel.hasMany(ResidenceModel);
-ResidenceModel.belongsTo(QuartiersModel);
+
 (async () => {
   await sequelize.sync({ force: false });
   // Code here
