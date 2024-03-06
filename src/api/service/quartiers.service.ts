@@ -1,4 +1,5 @@
 import { QuartiersInterface } from "../interface/quartiers.interface";
+import CommunesModel from "../models/communes.model";
 import QuartiersModel from "../models/quartiers.model";
 
 
@@ -26,7 +27,14 @@ export async function findQuartier(value: any) {
 
 export async function getallQuartier() {
 
-    const Quartier = await QuartiersModel.findAll();
+    const Quartier = await QuartiersModel.findAll({
+        include:[
+            {
+                model: CommunesModel,
+
+            }
+        ]
+    });
     return Quartier;
 
 
