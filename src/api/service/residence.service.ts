@@ -1,4 +1,5 @@
 import { ResidenceInterface } from "../interface/residence.interface";
+import QuartiersModel from "../models/quartiers.model";
 import ResidenceModel from "../models/residence.model";
 
 
@@ -25,7 +26,16 @@ export async function findResidence(value: any) {
 
 export async function getallResidence() {
 
-    const Residence = await ResidenceModel.findAll();
+    const Residence = await ResidenceModel.findAll(
+        {
+            include:[
+                {
+                    model: QuartiersModel,
+    
+                }
+            ]
+        }
+    );
     return Residence;
 
 
@@ -42,7 +52,16 @@ export async function deleteResidenceid(id: string) {
 }
 export async function getResidencebyId(id: number) {
 
-    const Residence = await ResidenceModel.findByPk(id);
+    const Residence = await ResidenceModel.findByPk(id,
+        {
+            include:[
+                {
+                    model: QuartiersModel,
+    
+                }
+            ]
+        }
+        );
     return Residence;
 
 
