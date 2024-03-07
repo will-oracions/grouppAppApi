@@ -72,6 +72,7 @@ PersonnesModel.belongsTo(ResidenceModel, { foreignKey: {
 PersonnesModel.hasMany(PersonnesModel, { 
     foreignKey: {
         name: 'Per_id',
+        type: DataTypes.INTEGER,
         allowNull: true,
     }
     });
@@ -82,11 +83,13 @@ PersonnesModel.belongsTo(PersonnesModel, {     foreignKey: {
 
     PersonnesModel.hasMany(AvoirVulnerabilite, {     foreignKey: {
         name: 'Per_id',
-        allowNull: false,
+        type: DataTypes.INTEGER,
+        allowNull: true,
     } });
     AvoirVulnerabilite.belongsTo(PersonnesModel, {     foreignKey: {
         name: 'Per_id',
-        allowNull: false,
+        type: DataTypes.INTEGER,
+        allowNull: true,
     } });
 
 
