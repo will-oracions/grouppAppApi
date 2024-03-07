@@ -72,12 +72,12 @@ PersonnesModel.belongsTo(ResidenceModel, { foreignKey: {
 PersonnesModel.hasMany(PersonnesModel, { 
     foreignKey: {
         name: 'Per_id',
-        allowNull: false,
+        allowNull: true,
     }
     });
 PersonnesModel.belongsTo(PersonnesModel, {     foreignKey: {
         name: 'Per_id',
-        allowNull: false,
+        allowNull: true,
     } });
 
     PersonnesModel.hasMany(AvoirVulnerabilite, {     foreignKey: {
