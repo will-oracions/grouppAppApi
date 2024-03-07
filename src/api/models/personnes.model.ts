@@ -74,20 +74,24 @@ PersonnesModel.hasMany(PersonnesModel, {
         name: 'Per_id',
         type: DataTypes.INTEGER,
         allowNull: true,
+        isNull: true,             // only allows null
+        notEmpty: true,
     }
     });
 PersonnesModel.belongsTo(PersonnesModel, {     foreignKey: {
         name: 'Per_id',
         allowNull: true,
-    } });
+        isNull: true,             // only allows null
+        notEmpty: true,
+        } });
 
     PersonnesModel.hasMany(AvoirVulnerabilite, {     foreignKey: {
-        name: 'Per_id',
+        name: 'idPer',
         type: DataTypes.INTEGER,
         allowNull: true,
     } });
     AvoirVulnerabilite.belongsTo(PersonnesModel, {     foreignKey: {
-        name: 'Per_id',
+        name: 'idPer',
         type: DataTypes.INTEGER,
         allowNull: true,
     } });
