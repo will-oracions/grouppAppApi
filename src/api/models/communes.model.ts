@@ -1,73 +1,65 @@
 import QuartiersModel from "./quartiers.model";
+import { Model, DataTypes } from "sequelize";
+import { sequelize } from "../utils/connect";
 
-
-const { Sequelize, Model, DataTypes } = require("sequelize");
-const { sequelize } = require("../utils/connect");
-
-const CommunesModel = sequelize.define("communes", {
-    id: {
-        type: DataTypes.INTEGER(11),
-        primaryKey: true,
-        autoIncrement: true,
-        allowNull: false,
-    
-    },
-    code: {
-        type: DataTypes.TEXT,
-        unique: true,
-        allowNull: false,
-        length: 255
-    
-    },
-    libelle: {
-        type: DataTypes.TEXT,
-        allowNull: false,
-    }
-
-},
-{
-    freezeTableName: true,
-    timestamps: true
+interface CommunesAttributes {
+    id: number;
+    code: string;
+    libelle: string;
 }
+
+class CommunesModel extends Model<CommunesAttributes> implements CommunesAttributes {
+    public id!: number;
+    public code!: string;
+    public libelle!: string;
+
+
+}
+
+CommunesModel.init(
+    {
+        id: {
+            type: DataTypes.INTEGER,
+            primaryKey: true,
+            autoIncrement: true,
+            allowNull: false,
+        },
+        code: {
+            type: DataTypes.TEXT,
+            unique: true,
+            allowNull: false,
+            validate: {
+                len: [1, 255],
+            },
+        },
+        libelle: {
+            type: DataTypes.TEXT,
+            allowNull: false,
+        },
+    },
+    {
+        sequelize,
+        modelName: "communes",
+        freezeTableName: true,
+        timestamps: true,
+    }
 );
-CommunesModel.hasMany(QuartiersModel, { 
+CommunesModel.hasMany(QuartiersModel, {
     foreignKey: {
         name: 'idCommunes',
         allowNull: false,
-    }
-    });
-QuartiersModel.belongsTo(CommunesModel, {    foreignKey: {
-    name: 'idCommunes',
-    allowNull: false,
-}});
+    },
+});
+QuartiersModel.belongsTo(CommunesModel, {
+    foreignKey: {
+        name: 'idCommunes',
+        allowNull: false,
+    },
+});
+// Ensure the table is created and ready to use
 (async () => {
-  await sequelize.sync({ force: false });
-  // Code here
+    await sequelize.sync({ force: false });
+    // Additional code for initialization, if needed
 })();
-module.exports = CommunesModel;
+
 export default CommunesModel;
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

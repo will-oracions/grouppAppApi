@@ -1,56 +1,41 @@
+import { Model, DataTypes } from "sequelize";
+import { sequelize } from "../utils/connect";
 
-const { Sequelize, Model, DataTypes } = require("sequelize");
-const { sequelize } = require("../utils/connect");
-
-const OngModel = sequelize.define("ong", {
-    id: {
-        type: DataTypes.INTEGER(11),
-        primaryKey: true,
-        autoIncrement: true,
-        allowNull: false,
-    
-    },
-    raisonSociale: {
-        type: DataTypes.TEXT,
-        allowNull: false,
-    },
-
-
-},
-{
-    freezeTableName: true,
-    timestamps: true
+interface OngAttributes {
+    id: number;
+    raisonSociale: string;
 }
+
+class OngModel extends Model<OngAttributes> implements OngAttributes {
+    public id!: number;
+    public raisonSociale!: string;
+}
+
+OngModel.init(
+    {
+        id: {
+            type: DataTypes.INTEGER,
+            primaryKey: true,
+            autoIncrement: true,
+            allowNull: false,
+        },
+        raisonSociale: {
+            type: DataTypes.TEXT,
+            allowNull: false,
+        },
+    },
+    {
+        sequelize,
+        modelName: "ong",
+        freezeTableName: true,
+        timestamps: true,
+    }
 );
 
+// Ensure the table is created and ready to use
 (async () => {
-  await sequelize.sync({ force: false });
-  // Code here
+    await sequelize.sync({ force: false });
+    // Additional code for initialization, if needed
 })();
-module.exports = OngModel;
+
 export default OngModel;
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

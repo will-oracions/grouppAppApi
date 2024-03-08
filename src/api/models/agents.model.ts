@@ -1,5 +1,5 @@
 
-const { Sequelize, Model, DataTypes } = require("sequelize");
+const { Model, DataTypes } = require("sequelize");
 const { sequelize } = require("../utils/connect");
 
 const AgentsModel = sequelize.define("agents", {
@@ -33,15 +33,6 @@ const AgentsModel = sequelize.define("agents", {
 })();
 module.exports = AgentsModel;
 export default AgentsModel;
-
-
-
-
-
-
-
-
-
 
 
 

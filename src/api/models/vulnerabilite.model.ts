@@ -1,62 +1,49 @@
-import AvoirVulnerabilite from "./avoirvulnerabilite.model";
+import { Model, DataTypes } from "sequelize";
+import { sequelize } from "../utils/connect";
 
-
-const { Sequelize, Model, DataTypes } = require("sequelize");
-const { sequelize } = require("../utils/connect");
-
-const VulnerabiliteModel = sequelize.define("vulnerabilite", {
-    id: {
-        type: DataTypes.INTEGER(11),
-        primaryKey: true,
-        autoIncrement: true,
-        allowNull: false,
-    
-    },
-    nom: {
-        type: DataTypes.TEXT,
-        allowNull: false,
-    },
-    description: {
-        type: DataTypes.TEXT,
-        allowNull: false,
-    },
-
-},
-
-{
-    freezeTableName: true,
-    timestamps: true
+interface VulnerabiliteAttributes {
+    id: number;
+    nom: string;
+    description: string;
+    // Add other attributes if needed
 }
+
+class VulnerabiliteModel extends Model<VulnerabiliteAttributes> implements VulnerabiliteAttributes {
+    public id!: number;
+    public nom!: string;
+    public description!: string;
+    // Add other attributes if needed
+}
+
+VulnerabiliteModel.init(
+    {
+        id: {
+            type: DataTypes.INTEGER,
+            primaryKey: true,
+            autoIncrement: true,
+            allowNull: false,
+        },
+        nom: {
+            type: DataTypes.TEXT,
+            allowNull: false,
+        },
+        description: {
+            type: DataTypes.TEXT,
+            allowNull: false,
+        },
+    },
+    {
+        sequelize,
+        modelName: "vulnerabilite",
+        freezeTableName: true,
+        timestamps: true,
+    }
 );
 
+// Ensure the table is created and ready to use
 (async () => {
-  await sequelize.sync({ force: false });
-  // Code here
+    await sequelize.sync({ force: false });
+    // Additional code for initialization, if needed
 })();
-module.exports = VulnerabiliteModel;
+
 export default VulnerabiliteModel;
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

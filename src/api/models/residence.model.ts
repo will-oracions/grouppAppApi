@@ -1,69 +1,59 @@
 import PersonnesModel from "./personnes.model";
 import QuartiersModel from "./quartiers.model";
+import { Sequelize, Model, DataTypes } from "sequelize";
+import { sequelize } from "../utils/connect";
 
-const { Sequelize, Model, DataTypes } = require("sequelize");
-const { sequelize } = require("../utils/connect");
-
-const ResidenceModel = sequelize.define("residence", {
-    id: {
-        type: DataTypes.INTEGER(11),
-        primaryKey: true,
-        autoIncrement: true,
-        allowNull: false,
-    
-    },
-    description: {
-        type: DataTypes.TEXT,
-        allowNull: false,
-    }
-
-},
-{
-    freezeTableName: true,
-    timestamps: true
+interface ResidenceAttributes {
+    id: number;
+    description: string;
+    // Add other attributes if needed
 }
+
+class ResidenceModel extends Model<ResidenceAttributes> implements ResidenceAttributes {
+    public id!: number;
+    public description!: string;
+    // Add other attributes if needed
+}
+
+ResidenceModel.init(
+    {
+        id: {
+            type: DataTypes.INTEGER,
+            primaryKey: true,
+            autoIncrement: true,
+            allowNull: false,
+        },
+        description: {
+            type: DataTypes.TEXT,
+            allowNull: false,
+        },
+    },
+    {
+        sequelize,
+        modelName: "residence",
+        freezeTableName: true,
+        timestamps: true,
+    }
 );
-QuartiersModel.hasMany(ResidenceModel,{
+
+// Define associations
+QuartiersModel.hasMany(ResidenceModel, {
     foreignKey: {
         name: 'idquartier',
         allowNull: false,
-    }
+    },
 });
-ResidenceModel.belongsTo(QuartiersModel,{
+ResidenceModel.belongsTo(QuartiersModel, {
     foreignKey: {
         name: 'idquartier',
         allowNull: false,
-    }
+    },
 });
 
+// Ensure the table is created and ready to use
 (async () => {
-  await sequelize.sync({ force: false });
-  // Code here
+    await sequelize.sync({ force: false });
+    // Additional code for initialization, if needed
 })();
-module.exports = ResidenceModel;
+
 export default ResidenceModel;
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

@@ -4,7 +4,7 @@ const { Sequelize } = require('sequelize');
 import mysql2  from "mysql2"
 
 
-const sequelize = new Sequelize('u877916646_groupApp', 'u877916646_username', 'grouppApp@12', {
+export const sequelize = new Sequelize('u877916646_groupApp', 'u877916646_username', 'grouppApp@12', {
   host: 'srv915.hstgr.io',
   port: '3306',
   dialect: 'mysql',

@@ -1,63 +1,59 @@
-import PersonnesModel from "./personnes.model";
 import VulnerabiliteModel from "./vulnerabilite.model";
+import { Model, DataTypes, Optional } from "sequelize";
+import { sequelize } from "../utils/connect";
 
-const { Sequelize, Model, DataTypes } = require("sequelize");
-const { sequelize } = require("../utils/connect");
-
-const AvoirVulnerabilite = sequelize.define("avoirvulnerabilite", {
-    id: {
-        type: DataTypes.INTEGER(11),
-        primaryKey: true,
-        autoIncrement: true,
-        allowNull: false,
-    
-    },
-},
-{
-    freezeTableName: true,
-    timestamps: true
+interface AvoirVulnerabiliteAttributes {
+    id: number;
 }
-); 
 
-VulnerabiliteModel.hasMany(AvoirVulnerabilite, { 
-    foreignKey: {
-        name: 'idvulnerabilte',
-        allowNull: false,
+interface AvoirVulnerabiliteCreationAttributes
+    extends Optional<AvoirVulnerabiliteAttributes, "id"> {}
+
+class AvoirVulnerabilite
+    extends Model<AvoirVulnerabiliteAttributes, AvoirVulnerabiliteCreationAttributes>
+    implements AvoirVulnerabiliteAttributes {
+    public id!: number;
+
+    // Add other attributes if needed
+
+    // Timestamps are managed by Sequelize, so no need to define them here.
+
+    // Define associations
+
+}
+
+AvoirVulnerabilite.init(
+    {
+        id: {
+            type: DataTypes.INTEGER,
+            primaryKey: true,
+            autoIncrement: true,
+            allowNull: false,
+        },
+    },
+    {
+        sequelize,
+        modelName: "avoirvulnerabilite",
+        freezeTableName: true,
+        timestamps: true,
     }
-    });
-AvoirVulnerabilite.belongsTo(VulnerabiliteModel, {     
+);
+VulnerabiliteModel.hasMany(AvoirVulnerabilite, {
     foreignKey: {
-    name: 'idvulnerabilte',
-    allowNull: false,
-}});
+        name: 'idvulnerabilite',
+        allowNull: false,
+    },
+});
+AvoirVulnerabilite.belongsTo(VulnerabiliteModel, {
+    foreignKey: {
+        name: 'idvulnerabilite',
+        allowNull: false,
+    },
+});
+// Ensure the table is created and ready to use
 (async () => {
-  await sequelize.sync({ force: false });
-  // Code here
+    await sequelize.sync({ force: false });
+    // Additional code for initialization, if needed
 })();
-module.exports = AvoirVulnerabilite;
+
 export default AvoirVulnerabilite;
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

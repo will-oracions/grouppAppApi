@@ -1,48 +1,50 @@
-import RolesModel from "./roles.models";
+import { Model, DataTypes } from "sequelize";
+import { sequelize } from "../utils/connect";
 
+interface UtilisateursAttributes {
+    id: number;
+    username: string;
+    password: string;
+    // Add other attributes if needed
+}
 
-const {  DataTypes } = require("sequelize");
-const { sequelize } = require("../utils/connect");
+class UtilisateursModel extends Model<UtilisateursAttributes> implements UtilisateursAttributes {
+    public id!: number;
+    public username!: string;
+    public password!: string;
+    // Add other attributes if needed
+}
 
-const UtilisateursModel = sequelize.define("utilisateurs", {
-  id: {
-    type: DataTypes.INTEGER(11),
-    primaryKey: true,
-    autoIncrement: true,
-    allowNull: false,
-
-},
-  username: {
-    type: DataTypes.TEXT,
-    allowNull: false,
-  },
-  password: {
-    type: DataTypes.TEXT,
-    allowNull: false,
-  },
-
-},
-  {
-    tableName: "utilisateurs",
-    freezeTableName: true,
-    timestamps: true
-  }
+UtilisateursModel.init(
+    {
+        id: {
+            type: DataTypes.INTEGER,
+            primaryKey: true,
+            autoIncrement: true,
+            allowNull: false,
+        },
+        username: {
+            type: DataTypes.TEXT,
+            allowNull: false,
+        },
+        password: {
+            type: DataTypes.TEXT,
+            allowNull: false,
+        },
+    },
+    {
+        sequelize,
+        modelName: "utilisateurs",
+        tableName: "utilisateurs",
+        freezeTableName: true,
+        timestamps: true,
+    }
 );
-RolesModel.hasMany(UtilisateursModel, { 
-  foreignKey: {
-    name: 'idrole',
-    allowNull: false,
-}
-  });
-UtilisateursModel.belongsTo(RolesModel, { 
-  foreignKey: {
-    name: 'idrole',
-    allowNull: false,
-}
-  });
+
+// Ensure the table is created and ready to use
 (async () => {
-  await sequelize.sync({ force: false });
-  // Code here
+    await sequelize.sync({ force: false });
+    // Additional code for initialization, if needed
 })();
-module.exports = UtilisateursModel;
+
 export default UtilisateursModel;

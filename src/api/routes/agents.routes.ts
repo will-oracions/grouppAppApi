@@ -1,7 +1,7 @@
 import { Express } from "express";
 import { AddAgents, deleteAgents, getAgentsById, getAllAgents, updateAgents } from "../controller/agents.controller";
 
-function agents(app: Express) {
+ function agents(app: Express) {
 
     /**
      * @swagger

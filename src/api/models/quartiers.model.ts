@@ -1,58 +1,47 @@
-import ResidenceModel from "./residence.model";
+import { Model, DataTypes } from "sequelize";
+import { sequelize } from "../utils/connect";
 
-
-const { Sequelize, Model, DataTypes } = require("sequelize");
-const { sequelize } = require("../utils/connect");
-
-const QuartiersModel = sequelize.define("quartiers", {
-    id: {
-        type: DataTypes.INTEGER(11),
-        primaryKey: true,
-        autoIncrement: true,
-        allowNull: false,
-    
-    },
-    libelle: {
-        type: DataTypes.TEXT,
-        allowNull: false,
-    },
-
-
-},
-{
-    freezeTableName: true,
-    timestamps: true
+interface QuartiersAttributes {
+    id: number;
+    libelle: string;
+    idCommunes: number;
 }
+
+class QuartiersModel extends Model<QuartiersAttributes> implements QuartiersAttributes {
+    public id!: number;
+    public libelle!: string;
+    public idCommunes!: number;
+}
+
+QuartiersModel.init(
+    {
+        id: {
+            type: DataTypes.INTEGER,
+            primaryKey: true,
+            autoIncrement: true,
+            allowNull: false,
+        },
+        libelle: {
+            type: DataTypes.TEXT,
+            allowNull: false,
+        },
+        idCommunes: {
+            type: DataTypes.INTEGER,
+            allowNull: false,
+        },
+    },
+    {
+        sequelize,
+        modelName: "quartiers",
+        freezeTableName: true,
+        timestamps: true,
+    }
 );
 
+// Ensure the table is created and ready to use
 (async () => {
-  await sequelize.sync({ force: false });
-  // Code here
+    await sequelize.sync({ force: false });
+    // Additional code for initialization, if needed
 })();
-module.exports = QuartiersModel;
+
 export default QuartiersModel;
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
