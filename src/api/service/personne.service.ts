@@ -1,4 +1,6 @@
+import CommunesModel from "../models/communes.model";
 import PersonnesModel from "../models/personnes.model";
+import QuartiersModel from "../models/quartiers.model";
 import ResidenceModel from "../models/residence.model";
 
 
@@ -59,6 +61,16 @@ export async function getPersonnebyId(id: number) {
         include:[
             {
                 model: ResidenceModel,
+                include:[
+                    {
+                        model: QuartiersModel,
+                        include:[
+                            {
+                                model: CommunesModel,
+                            }
+                        ]
+                    }
+                ]
 
             },
             {
