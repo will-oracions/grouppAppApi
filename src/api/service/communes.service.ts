@@ -1,4 +1,3 @@
-import { CommunesInterface } from "../interface/communes.interface";
 import CommunesModel from "../models/communes.model";
 
 const exceljs = require('exceljs');
@@ -7,7 +6,7 @@ const exceljs = require('exceljs');
 
 
 
-export async function createCommunes(value: CommunesInterface) {
+export async function createCommunes(value: any) {
 
     let newCommunes = CommunesModel.create(
         value
@@ -51,7 +50,7 @@ export async function getCommunesbyId(id: number) {
 
 
 }
-export async function updatedCommunes(id: number, value: CommunesInterface) {
+export async function updatedCommunes(id: number, value: any) {
     const data = await CommunesModel.update(value, {
         where: {
             id: id

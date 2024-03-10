@@ -1,5 +1,5 @@
 import { Express } from "express";
-import { AddPersonne, deletePersonne, getAllPersonne, getPersonneById, updatePersonne } from "../controller/personne.controller";
+import { AddPersonne, deletePersonne, getAllPersonne, getAllPersonneChef, getPersonneById, updatePersonne } from "../controller/personne.controller";
 
 function personnes(app: Express) {
 
@@ -15,6 +15,19 @@ function personnes(app: Express) {
      *             description: all personnes
      */
     app.get('/api/personnes', getAllPersonne)
+
+        /**
+     * @swagger
+     * '/api/chef/personnes':
+     *  get:
+     *     tags:
+     *      - personnes
+     *     descriptions: Get all personnes chef
+     *     responses:
+     *         200:
+     *             description: all personnes chef
+     */
+        app.get('/api/chef/personnes', getAllPersonneChef)
 
 
     /**

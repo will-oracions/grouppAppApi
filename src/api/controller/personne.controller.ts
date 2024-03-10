@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import { createPersonne, deletePersonneid, getPersonnebyId, getallPersonne, updatedPersonne } from "../service/personne.service";
+import { createPersonne, deletePersonneid, getPersonnebyId, getallPersonne, getallPersonneChefDeFamille, updatedPersonne } from "../service/personne.service";
 
 
 export async function AddPersonne(
@@ -49,6 +49,18 @@ export async function getAllPersonne(
   res: Response
 ) {
   getallPersonne()
+    .then(function (allPersonne) {
+      return res.status(201).json(allPersonne)
+    })
+    .catch(function (err) {
+      return res.status(500).json({ 'error': "impossible de retouner la liste des Personnes", err })
+    })
+}
+export async function getAllPersonneChef(
+  req: Request,
+  res: Response
+) {
+  getallPersonneChefDeFamille()
     .then(function (allPersonne) {
       return res.status(201).json(allPersonne)
     })

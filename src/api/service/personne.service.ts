@@ -1,11 +1,11 @@
-import { PersonneInterface } from "../interface/personne.interface";
 import PersonnesModel from "../models/personnes.model";
+import ResidenceModel from "../models/residence.model";
 
 
 
 
 
-export async function createPersonne(value: PersonneInterface) {
+export async function createPersonne(value: any) {
 
     let newPersonne = PersonnesModel.create(
         value
@@ -32,6 +32,17 @@ export async function getallPersonne() {
 
 
 }
+export async function getallPersonneChefDeFamille() {
+
+    const Personne = await PersonnesModel.findAll({
+        where: {
+            is_chef_menage: true
+        }
+    });
+    return Personne;
+
+
+}
 export async function deletePersonneid(id: string) {
 
     await PersonnesModel.destroy({
@@ -44,12 +55,27 @@ export async function deletePersonneid(id: string) {
 }
 export async function getPersonnebyId(id: number) {
 
-    const Personne = await PersonnesModel.findByPk(id);
+    const Personne = await PersonnesModel.findByPk(id,{
+        include:[
+            {
+                model: ResidenceModel,
+
+            },
+            {
+                model: PersonnesModel,
+                as: 'Enfant'
+            }
+
+        ],
+        
+    }
+        
+);
     return Personne;
 
 
 }
-export async function updatedPersonne(id: string, value: PersonneInterface) {
+export async function updatedPersonne(id: string, value: any) {
     const data = await PersonnesModel.update(value, {
         where: {
             id: id

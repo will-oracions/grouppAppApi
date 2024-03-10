@@ -1,11 +1,10 @@
-import { QuartiersInterface } from "../interface/quartiers.interface";
 import CommunesModel from "../models/communes.model";
 import QuartiersModel from "../models/quartiers.model";
 
 
 
 
-export async function createQuartier(value: QuartiersInterface) {
+export async function createQuartier(value: any) {
 
     let newQuartier = QuartiersModel.create(
         value
@@ -56,7 +55,7 @@ export async function getQuartierbyId(id: number) {
 
 
 }
-export async function updatedQuartier(id: string, value: QuartiersInterface) {
+export async function updatedQuartier(id: string, value: any) {
     const data = await QuartiersModel.update(value, {
         where: {
             id: id
