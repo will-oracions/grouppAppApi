@@ -34,23 +34,28 @@ PersonnesModel.init({
   },
   is_cni: {
     type: DataTypes.BOOLEAN,
-    allowNull: false,
-  },
+    allowNull: true,
+    defaultValue: false,
+    },
   is_actenaissance: {
     type: DataTypes.BOOLEAN,
-    allowNull: false,
-  },
+    allowNull: true,
+    defaultValue: false,
+    },
   is_autochtone: {
     type: DataTypes.BOOLEAN,
-    allowNull: false,
-  },
+    allowNull: true,
+    defaultValue: false,
+    },
   is_handicape: {
     type: DataTypes.BOOLEAN,
-    allowNull: false,
+    allowNull: true,
+    defaultValue: false,
   },
   is_chef_menage: {
     type: DataTypes.BOOLEAN,
-    allowNull: false,
+    allowNull: true,
+    defaultValue: false,
   },
 }, {
   sequelize,
