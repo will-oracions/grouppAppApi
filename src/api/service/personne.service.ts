@@ -63,7 +63,7 @@ export async function getPersonnebyId(id: number) {
             },
             {
                 model: PersonnesModel,
-                as: 'Enfant'
+                as: 'Children'
             }
 
         ],

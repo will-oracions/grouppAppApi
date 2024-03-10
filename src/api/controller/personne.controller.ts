@@ -72,6 +72,7 @@ export async function getPersonneById(
   req: Request,
   res: Response
 ) {
+  console.log(req.params.id)
 
   getPersonnebyId(parseInt(req.params.id))
     .then(function (Personne) {

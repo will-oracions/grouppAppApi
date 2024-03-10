@@ -15,21 +15,7 @@ function personnes(app: Express) {
      *             description: all personnes
      */
     app.get('/api/personnes', getAllPersonne)
-
-        /**
-     * @swagger
-     * '/api/chef/personnes':
-     *  get:
-     *     tags:
-     *      - personnes
-     *     descriptions: Get all personnes chef
-     *     responses:
-     *         200:
-     *             description: all personnes chef
-     */
-        app.get('/api/chef/personnes', getAllPersonneChef)
-
-
+    
     /**
     * @swagger
     * '/api/personnes/{id}':
@@ -49,6 +35,21 @@ function personnes(app: Express) {
     *             description: Get personnes by Id
     */
     app.get('/api/personnes/:id', getPersonneById)
+
+        /**
+     * @swagger
+     * '/api/chef/all/personnes':
+     *  get:
+     *     tags:
+     *      - personnes
+     *     descriptions: Get all personnes chef
+     *     responses:
+     *         200:
+     *             description: all personnes chef
+     */
+        app.get('/api/chef/all/personnes', getAllPersonneChef)
+
+
 
     /**
       * @swagger
