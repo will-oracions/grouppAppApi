@@ -4,7 +4,7 @@ import { number, object, string, TypeOf, date, boolean } from "zod";
  * @openapi
  * components:
  *  schemas:
- *    CreateProductInput:
+ *    CreatePersonneInput:
  *      type: object
  *      required:
  *        - noms
@@ -16,6 +16,7 @@ import { number, object, string, TypeOf, date, boolean } from "zod";
  *        - is_autochtone,
  *        - is_handicape,
  *        - is_chef_menage,
+ *        - vulnerabilite
  *      properties:
  *        noms:
  *          type: string
@@ -41,7 +42,10 @@ import { number, object, string, TypeOf, date, boolean } from "zod";
  *        is_chef_menage:
  *          type: boolean
  *          default: false
- *    CreateProductResponse:
+ *        vulnerabilite:
+ *          type: array
+ *          default: []
+ *    CreatePersonneResponse:
  *      type: object
  *      properties:
  *        noms:
@@ -68,7 +72,7 @@ import { number, object, string, TypeOf, date, boolean } from "zod";
  *          type: string
  */
 
-export const CreateProductSchema = object({
+export const CreatePersonneSchema = object({
   body: object({
     noms: string({
       required_error: "le noms est obligatoire",

@@ -1,5 +1,6 @@
 import CommunesModel from "../models/communes.model";
 import QuartiersModel from "../models/quartiers.model";
+import ResidenceModel from "../models/residence.model";
 
 
 
@@ -17,7 +18,9 @@ export async function createQuartier(value: any) {
 
 export async function findQuartier(value: any) {
     const val = await QuartiersModel.findOne({
-        where: { id: value }
+        where: { id: value },
+        
+
     })
     return val
 }
@@ -50,7 +53,19 @@ export async function deleteQuartierid(id: string) {
 }
 export async function getQuartierbyId(id: number) {
 
-    const Quartier = await QuartiersModel.findByPk(id);
+    const Quartier = await QuartiersModel.findByPk(id,{
+        include:[
+            {
+                model: CommunesModel,
+
+            },
+            {
+                model: ResidenceModel,
+
+            }
+        ]
+
+    });
     return Quartier;
 
 

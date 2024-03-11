@@ -1,5 +1,6 @@
 import { Request, Response } from "express";
 import { createPersonne, deletePersonneid, getPersonnebyId, getallPersonne, getallPersonneChefDeFamille, updatedPersonne } from "../service/personne.service";
+import { createAvoir } from "../service/avoir.service";
 
 
 export async function AddPersonne(
@@ -7,7 +8,14 @@ export async function AddPersonne(
   res: Response
 ) {
   try {
-    const data = await createPersonne(req.body);
+    const data:any = await createPersonne(req.body);
+    const vulnerabilite = req.body.vulnerabilite;
+    if(vulnerabilite.length > 0 && data){
+      for(let vulnerable of vulnerabilite){
+        let value = {"idvulnerabilite":parseInt(vulnerable), "idPer": parseInt(data.id)}
+        await createAvoir(value);
+      }
+    }
     return res.status(200).json(data);
   } catch (e: any) {
     console.log(e);

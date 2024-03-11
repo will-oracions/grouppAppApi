@@ -1,7 +1,9 @@
+import AvoirVulnerabilite from "../models/avoirvulnerabilite.model";
 import CommunesModel from "../models/communes.model";
 import PersonnesModel from "../models/personnes.model";
 import QuartiersModel from "../models/quartiers.model";
 import ResidenceModel from "../models/residence.model";
+import VulnerabiliteModel from "../models/vulnerabilite.model";
 
 
 
@@ -9,10 +11,9 @@ import ResidenceModel from "../models/residence.model";
 
 export async function createPersonne(value: any) {
 
-    let newPersonne = PersonnesModel.create(
+    const newPersonne = PersonnesModel.create(
         value
     );
-
     return newPersonne
 
 
@@ -60,6 +61,13 @@ export async function getPersonnebyId(id: number) {
     const Personne = await PersonnesModel.findByPk(id,{
         include:[
             {
+                model: AvoirVulnerabilite,
+                include:[{
+                    model:VulnerabiliteModel
+                }]
+            },
+
+            {
                 model: ResidenceModel,
                 include:[
                     {
@@ -76,8 +84,8 @@ export async function getPersonnebyId(id: number) {
             {
                 model: PersonnesModel,
                 as: 'Children'
-            }
-
+            },
+        
         ],
         
     }

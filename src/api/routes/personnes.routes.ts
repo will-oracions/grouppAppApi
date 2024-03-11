@@ -71,14 +71,14 @@ function personnes(app: Express) {
       *      content:
       *        application/json:
       *           schema:
-      *              $ref: '#/components/schemas/CreateProductInput'
+      *              $ref: '#/components/schemas/CreatePersonneInput'
       *     responses:
       *      200:
       *        description: Success
       *        content:
       *          application/json:
       *            schema:
-      *              $ref: '#/components/schemas/CreateProductResponse'
+      *              $ref: '#/components/schemas/CreatePersonneResponse'
       *      409:
       *        description: Conflict
       *      400:
@@ -97,14 +97,14 @@ function personnes(app: Express) {
 *      content:
 *        application/json:
 *           schema:
-*              $ref: '#/components/schemas/CreateProductInput'
+*              $ref: '#/components/schemas/CreatePersonneInput'
 *     responses:
 *      200:
 *        description: Success
 *        content:
 *          application/json:
 *            schema:
-*              $ref: '#/components/schemas/CreateProductResponse'
+*              $ref: '#/components/schemas/CreatePersonneResponse'
 *      409:
 *        description: Conflict
 *      400:

@@ -11,4 +11,4 @@ export interface PersonneInterface{
     is_handicape: boolean,
     is_chef_menage: boolean,
     
-}
+} 
