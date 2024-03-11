@@ -1,5 +1,5 @@
 import { Express } from "express";
-import { AddAvoir, deleteAvoir, getAllAvoir, updateAvoir } from "../controller/avoirvulnerabilite.controller";
+import { AddAvoir, deleteAvoir, getAllAvoir, getAllState, updateAvoir } from "../controller/avoirvulnerabilite.controller";
 
 function avoir(app: Express) {
 
@@ -15,6 +15,18 @@ function avoir(app: Express) {
      *             description: all avoir
      */
     app.get('/api/avoir', getAllAvoir)
+
+    
+    /**
+     * @swagger
+     * '/api/state':
+     *  get:
+     *     descriptions: Get statistique
+     *     responses:
+     *         200:
+     *             description: Get statistique
+     */
+    app.get('/api/state', getAllState)
 
     /**
       * @swagger

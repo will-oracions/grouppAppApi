@@ -1,4 +1,8 @@
 import AvoirVulnerabilite from "../models/avoirvulnerabilite.model";
+import CommunesModel from "../models/communes.model";
+import PersonnesModel from "../models/personnes.model";
+import QuartiersModel from "../models/quartiers.model";
+import VulnerabiliteModel from "../models/vulnerabilite.model";
 
 
 
@@ -23,7 +27,22 @@ export async function findAvoir(value: any) {
     return val
 }
 
+export async function getallstate(){
+    const personnes = await PersonnesModel.findAll();
+    const vulnerabilite = await VulnerabiliteModel.findAll();
+    const quartiers = await QuartiersModel.findAll();
+    const commune = await CommunesModel.findAll();
 
+    const state = {
+        "nbrePersonne": personnes.length,
+        "nbreCommune":commune.length,
+        "nbreVulnerabilite": vulnerabilite.length,
+        "nbreQuartiers":quartiers.length
+    }
+
+    return state;
+
+}
 
 export async function getallAvoir() {
 

@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import { createAvoir, deleteAvoirid, getallAvoir, updatedAvoir } from "../service/avoir.service";
+import { createAvoir, deleteAvoirid, getallAvoir, getallstate, updatedAvoir } from "../service/avoir.service";
 
 
 export async function AddAvoir(
@@ -54,6 +54,20 @@ export async function getAllAvoir(
     })
     .catch(function (err) {
       return res.status(500).json({ 'error': "impossible de retouner la liste des Avoir", err })
+    })
+}
+
+
+export async function getAllState(
+  req: Request,
+  res: Response
+) {
+  getallstate()
+    .then(function (state) {
+      return res.status(201).json(state)
+    })
+    .catch(function (err) {
+      return res.status(500).json({ 'error': "impossible de retourner les statistiques", err })
     })
 }
 
