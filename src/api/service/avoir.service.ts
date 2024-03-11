@@ -32,12 +32,18 @@ export async function getallstate(){
     const vulnerabilite = await VulnerabiliteModel.findAll();
     const quartiers = await QuartiersModel.findAll();
     const commune = await CommunesModel.findAll();
+    const lastInsertPerson = await PersonnesModel.findAll({
 
+        order: [['createdAt', 'DESC']],
+        limit: 5,
+
+    })
     const state = {
         "nbrePersonne": personnes.length,
         "nbreCommune":commune.length,
         "nbreVulnerabilite": vulnerabilite.length,
-        "nbreQuartiers":quartiers.length
+        "nbreQuartiers":quartiers.length,
+        "dernierPersonneEnregistre": lastInsertPerson
     }
 
     return state;
