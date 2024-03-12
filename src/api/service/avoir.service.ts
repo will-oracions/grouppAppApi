@@ -28,22 +28,40 @@ export async function findAvoir(value: any) {
 }
 
 export async function getallstate(){
+    const data = [];
     const personnes = await PersonnesModel.findAll();
     const vulnerabilite = await VulnerabiliteModel.findAll();
     const quartiers = await QuartiersModel.findAll();
     const commune = await CommunesModel.findAll();
     const lastInsertPerson = await PersonnesModel.findAll({
-
         order: [['createdAt', 'DESC']],
         limit: 5,
 
     })
+    const vulnerabilitePersonne = await VulnerabiliteModel.findAll({
+        include:[
+            {
+                model: AvoirVulnerabilite,
+                include:[{
+                    model: PersonnesModel
+                }]
+            }
+        ]
+    });
+    let value:any;
+    for(value of vulnerabilitePersonne){
+        let temporaile = {"libelle": value.nom, "nombre":value.avoirvulnerabilites.length};
+        data.push(temporaile);
+    }
+    
     const state = {
         "nbrePersonne": personnes.length,
         "nbreCommune":commune.length,
         "nbreVulnerabilite": vulnerabilite.length,
         "nbreQuartiers":quartiers.length,
-        "dernierPersonneEnregistre": lastInsertPerson
+        "dernierPersonneEnregistre": lastInsertPerson,
+        "vulnerabiliteState": data
+
     }
 
     return state;
