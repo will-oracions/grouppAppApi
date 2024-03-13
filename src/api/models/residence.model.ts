@@ -1,7 +1,7 @@
+import { sequelize } from "../utils/database/sequelize";
 import PersonnesModel from "./personnes.model";
 import QuartiersModel from "./quartiers.model";
 import { Sequelize, Model, DataTypes } from "sequelize";
-import { sequelize } from "../utils/database/sequelize";
 
 interface ResidenceAttributes {
   id: number;
@@ -54,9 +54,9 @@ ResidenceModel.belongsTo(QuartiersModel, {
 });
 
 // Ensure the table is created and ready to use
-// (async () => {
-//   await sequelize.sync({ force: false });
-//   // Additional code for initialization, if needed
-// })();
+(async () => {
+  await sequelize.sync({ force: false });
+  // Additional code for initialization, if needed
+})();
 
 export default ResidenceModel;

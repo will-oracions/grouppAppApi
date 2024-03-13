@@ -25,7 +25,7 @@ QuartiersModel.init(
       allowNull: false,
     },
     libelle: {
-      type: DataTypes.STRING,
+      type: DataTypes.TEXT,
       allowNull: false,
     },
     idCommunes: {
@@ -41,10 +41,10 @@ QuartiersModel.init(
   }
 );
 
-// Ensure the table is created and ready to use
+// // Ensure the table is created and ready to use
 // (async () => {
-//   await sequelize.sync({ force: false });
-//   // Additional code for initialization, if needed
+//     await sequelize.sync({ force: false });
+//     // Additional code for initialization, if needed
 // })();
 
 export default QuartiersModel;
