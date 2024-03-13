@@ -1,47 +1,50 @@
 import { Model, DataTypes } from "sequelize";
-import { sequelize } from "../utils/connect";
+import { sequelize } from "../utils/database/sequelize";
 
 interface QuartiersAttributes {
-    id: number;
-    libelle: string;
-    idCommunes: number;
+  id: number;
+  libelle: string;
+  idCommunes: number;
 }
 
-class QuartiersModel extends Model<QuartiersAttributes> implements QuartiersAttributes {
-    public id!: number;
-    public libelle!: string;
-    public idCommunes!: number;
+class QuartiersModel
+  extends Model<QuartiersAttributes>
+  implements QuartiersAttributes
+{
+  public id!: number;
+  public libelle!: string;
+  public idCommunes!: number;
 }
 
 QuartiersModel.init(
-    {
-        id: {
-            type: DataTypes.INTEGER,
-            primaryKey: true,
-            autoIncrement: true,
-            allowNull: false,
-        },
-        libelle: {
-            type: DataTypes.TEXT,
-            allowNull: false,
-        },
-        idCommunes: {
-            type: DataTypes.INTEGER,
-            allowNull: false,
-        },
+  {
+    id: {
+      type: DataTypes.INTEGER,
+      primaryKey: true,
+      autoIncrement: true,
+      allowNull: false,
     },
-    {
-        sequelize,
-        modelName: "quartiers",
-        freezeTableName: true,
-        timestamps: true,
-    }
+    libelle: {
+      type: DataTypes.TEXT,
+      allowNull: false,
+    },
+    idCommunes: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+    },
+  },
+  {
+    sequelize,
+    modelName: "quartiers",
+    freezeTableName: true,
+    timestamps: true,
+  }
 );
 
-// Ensure the table is created and ready to use
-(async () => {
-    await sequelize.sync({ force: false });
-    // Additional code for initialization, if needed
-})();
+// // Ensure the table is created and ready to use
+// (async () => {
+//     await sequelize.sync({ force: false });
+//     // Additional code for initialization, if needed
+// })();
 
 export default QuartiersModel;

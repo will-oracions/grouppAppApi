@@ -1,53 +1,22 @@
-// import logger from './logger';
+import env from "../../../config/env";
+import logger from "../helpers/logger";
+import { sequelize } from "./database/sequelize";
 
-const { Sequelize } = require('sequelize');
-import mysql2  from "mysql2"
+const databaseConfig = `
 
+DATABASE_URL=${env.DATABASE_URL}
+DATABASE_LOGGING=${env.DATABASE_LOGGING}
+DATABASE_SYNC=${env.DATABASE_SYNC}
 
-export const sequelize = new Sequelize('u877916646_groupApp', 'u877916646_username', 'grouppApp@12', {
-  host: 'srv915.hstgr.io',
-  port: '3306',
-  dialect: 'mysql',
-  dialectModule: mysql2,
-  pool: {
-    max: 100,
-    min: 0,
-    acquire: 1000000,
-    idle: 100000,
-    evict: 2000,
-  },
-  dialectOptions: {
-    decimalNumbers: true,
-  },
-  retry: {
-    match: [
-        /etimedout/,
-        /ehostunreach/,
-        /econnreset/,
-        /econnrefused/,
-        /etimedout/,
-        /esockettimedout/,
-        /ehostunreach/,
-        /epipe/,
-        /eai_again/,
-        /sequelizeconnectionerror/,
-        /sequelizeconnectionrefusederror/,
-        /sequelizehostnotfounderror/,
-        /sequelizehostnotreachableerror/,
-        /sequelizeinvalidconnectionerror/,
-        /sequelizeconnectiontimedouterror/
-    ],
-    max: 5
-  }
-});
+`;
+// DATABASE_PROVIDER=${env.DATABASE_PROVIDER}
+// DATABASE_HOST=${env.DATABASE_HOST}
+// DATABASE_PORT=${env.DATABASE_PORT}
+// DATABASE_NAME=${env.DATABASE_NAME}
+// DATABASE_USER=${env.DATABASE_USER}
+// DATABASE_PASSWORD=${env.DATABASE_PASSWORD}
 
-const connect =async ()=>{
- 
-      try {
-       await sequelize.authenticate();
-       console.log('Connexion a la base de donnée .');
-      } catch (error) {
-        console.log('Unable to connect to the database:', error);
-      }
-}
-module.exports = {sequelize, connect};
+export const connect = async () => {
+  logger.info(`\nConnexion à la base de donnée: ${databaseConfig}`);
+  return sequelize.authenticate();
+};
