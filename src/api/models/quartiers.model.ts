@@ -25,11 +25,11 @@ QuartiersModel.init(
       allowNull: false,
     },
     libelle: {
-      type: DataTypes.TEXT,
+      type: DataTypes.STRING,
       allowNull: false,
     },
     idCommunes: {
-      type: DataTypes.INTEGER,
+      type: DataTypes.STRING,
       allowNull: false,
     },
   },

@@ -1,12 +1,17 @@
-var jwt = require('jsonwebtoken')
-var JWT8_SIGN_SECRET = "sji49D9SU8FD09QN9fddn84S9N39D8S989Q9#eJF9Sddkszkxooos"
+import env from "../../../config/env";
+
+const jwt = require("jsonwebtoken");
+
+const JWT8_SIGN_SECRET = env.JWT8_SIGN_SECRET;
 
 module.exports = {
-    generateTokenUser: function(userData:any){
-        return jwt.sign({
-            UserId: userData.id,
-            Email: userData.email
-        },
-        JWT8_SIGN_SECRET)
-    }
-}
+  generateTokenUser: function (userData: any) {
+    return jwt.sign(
+      {
+        UserId: userData.id,
+        Email: userData.email,
+      },
+      JWT8_SIGN_SECRET
+    );
+  },
+};

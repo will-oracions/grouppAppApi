@@ -26,7 +26,7 @@ CommunesModel.init(
       allowNull: false,
     },
     code: {
-      type: DataTypes.TEXT,
+      type: DataTypes.STRING,
       unique: true,
       allowNull: false,
       validate: {
@@ -34,7 +34,7 @@ CommunesModel.init(
       },
     },
     libelle: {
-      type: DataTypes.TEXT,
+      type: DataTypes.STRING,
       allowNull: false,
     },
   },

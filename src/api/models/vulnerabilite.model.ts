@@ -27,11 +27,11 @@ VulnerabiliteModel.init(
       allowNull: false,
     },
     nom: {
-      type: DataTypes.TEXT,
+      type: DataTypes.STRING,
       allowNull: false,
     },
     description: {
-      type: DataTypes.TEXT,
+      type: DataTypes.STRING,
       allowNull: false,
     },
   },

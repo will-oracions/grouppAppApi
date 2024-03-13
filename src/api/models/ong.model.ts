@@ -20,7 +20,7 @@ OngModel.init(
       allowNull: false,
     },
     raisonSociale: {
-      type: DataTypes.TEXT,
+      type: DataTypes.STRING,
       allowNull: false,
     },
   },

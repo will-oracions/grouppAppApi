@@ -14,7 +14,7 @@ PersonnesModel.init(
       allowNull: false,
     },
     nom: {
-      type: DataTypes.TEXT,
+      type: DataTypes.STRING,
       allowNull: false,
     },
     date_naissance: {
@@ -22,11 +22,11 @@ PersonnesModel.init(
       allowNull: false,
     },
     statut: {
-      type: DataTypes.TEXT,
+      type: DataTypes.STRING,
       allowNull: false,
     },
     region: {
-      type: DataTypes.TEXT,
+      type: DataTypes.STRING,
       allowNull: false,
     },
     sexe: {

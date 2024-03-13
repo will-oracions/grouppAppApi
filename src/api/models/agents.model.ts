@@ -6,17 +6,17 @@ const AgentsModel = sequelize.define(
   "agents",
   {
     id: {
-      type: DataTypes.INTEGER(11),
+      type: DataTypes.INTEGER,
       primaryKey: true,
       autoIncrement: true,
       allowNull: false,
     },
     nom: {
-      type: DataTypes.TEXT,
+      type: DataTypes.STRING,
       allowNull: false,
     },
     prenoms: {
-      type: DataTypes.TEXT,
+      type: DataTypes.STRING,
       allowNull: false,
     },
   },

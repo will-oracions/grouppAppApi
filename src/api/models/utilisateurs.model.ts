@@ -27,11 +27,11 @@ UtilisateursModel.init(
       allowNull: false,
     },
     username: {
-      type: DataTypes.TEXT,
+      type: DataTypes.STRING,
       allowNull: false,
     },
     password: {
-      type: DataTypes.TEXT,
+      type: DataTypes.STRING,
       allowNull: false,
     },
   },
