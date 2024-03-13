@@ -46,5 +46,5 @@ import env from "../../../../config/env";
 // );
 
 export const sequelize = new Sequelize(env.DATABASE_URL, {
-  logging: false,
+  logging: env.DATABASE_LOGGING,
 });
