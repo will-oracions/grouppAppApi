@@ -1,59 +1,62 @@
 import VulnerabiliteModel from "./vulnerabilite.model";
 import { Model, DataTypes, Optional } from "sequelize";
-import { sequelize } from "../utils/connect";
+import { sequelize } from "../utils/database/sequelize";
 
 interface AvoirVulnerabiliteAttributes {
-    id: number;
+  id: number;
 }
 
 interface AvoirVulnerabiliteCreationAttributes
-    extends Optional<AvoirVulnerabiliteAttributes, "id"> {}
+  extends Optional<AvoirVulnerabiliteAttributes, "id"> {}
 
 class AvoirVulnerabilite
-    extends Model<AvoirVulnerabiliteAttributes, AvoirVulnerabiliteCreationAttributes>
-    implements AvoirVulnerabiliteAttributes {
-    public id!: number;
+  extends Model<
+    AvoirVulnerabiliteAttributes,
+    AvoirVulnerabiliteCreationAttributes
+  >
+  implements AvoirVulnerabiliteAttributes
+{
+  public id!: number;
 
-    // Add other attributes if needed
+  // Add other attributes if needed
 
-    // Timestamps are managed by Sequelize, so no need to define them here.
+  // Timestamps are managed by Sequelize, so no need to define them here.
 
-    // Define associations
-
+  // Define associations
 }
 
 AvoirVulnerabilite.init(
-    {
-        id: {
-            type: DataTypes.INTEGER,
-            primaryKey: true,
-            autoIncrement: true,
-            allowNull: false,
-        },
+  {
+    id: {
+      type: DataTypes.INTEGER,
+      primaryKey: true,
+      autoIncrement: true,
+      allowNull: false,
     },
-    {
-        sequelize,
-        modelName: "avoirvulnerabilite",
-        freezeTableName: true,
-        timestamps: true,
-    }
+  },
+  {
+    sequelize,
+    modelName: "avoirvulnerabilite",
+    freezeTableName: true,
+    timestamps: true,
+  }
 );
 VulnerabiliteModel.hasMany(AvoirVulnerabilite, {
-    foreignKey: {
-        name: 'idvulnerabilite',
-        allowNull: false,
-    },
+  foreignKey: {
+    name: "idvulnerabilite",
+    allowNull: false,
+  },
 });
 AvoirVulnerabilite.belongsTo(VulnerabiliteModel, {
-    foreignKey: {
-        name: 'idvulnerabilite',
-        allowNull: false,
-    },
+  foreignKey: {
+    name: "idvulnerabilite",
+    allowNull: false,
+  },
 });
 // Ensure the table is created and ready to use
-(async () => {
-    await sequelize.sync({ force: false });
-    // Additional code for initialization, if needed
-})();
+// (async () => {
+//   await sequelize.sync({ force: false });
+//   // Additional code for initialization, if needed
+// })();
 
 export default AvoirVulnerabilite;
