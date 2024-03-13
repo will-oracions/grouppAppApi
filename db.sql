@@ -29,8 +29,8 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `agents` (
   `id` int(11) NOT NULL,
-  `nom` text NOT NULL,
-  `prenoms` text NOT NULL,
+  `nom` varchar(255) NOT NULL,
+  `prenoms` varchar(255) NOT NULL,
   `createdAt` datetime NOT NULL,
   `updatedAt` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -76,8 +76,8 @@ INSERT INTO `avoirvulnerabilite` (`id`, `createdAt`, `updatedAt`, `idvulnerabili
 
 CREATE TABLE `communes` (
   `id` int(11) NOT NULL,
-  `code` text NOT NULL,
-  `libelle` text NOT NULL,
+  `code` varchar(255) NOT NULL,
+  `libelle` varchar(255) NOT NULL,
   `createdAt` datetime NOT NULL,
   `updatedAt` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -426,7 +426,7 @@ INSERT INTO `communes` (`id`, `code`, `libelle`, `createdAt`, `updatedAt`) VALUE
 
 CREATE TABLE `ong` (
   `id` int(11) NOT NULL,
-  `raisonSociale` text NOT NULL,
+  `raisonSociale` varchar(255) NOT NULL,
   `createdAt` datetime NOT NULL,
   `updatedAt` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -439,11 +439,11 @@ CREATE TABLE `ong` (
 
 CREATE TABLE `personnes` (
   `id` int(11) NOT NULL,
-  `nom` text NOT NULL,
+  `nom` varchar(255) NOT NULL,
   `date_naissance` datetime NOT NULL,
-  `statut` text NOT NULL,
-  `region` text NOT NULL,
-  `sexe` text NOT NULL,
+  `statut` varchar(255) NOT NULL,
+  `region` varchar(255) NOT NULL,
+  `sexe` varchar(255) NOT NULL,
   `is_cni` tinyint(1) NOT NULL,
   `is_actenaissance` tinyint(1) NOT NULL,
   `is_autochtone` tinyint(1) NOT NULL,
@@ -463,11 +463,11 @@ CREATE TABLE `personnes` (
 
 CREATE TABLE `PersonnesModel` (
   `id` int(11) NOT NULL,
-  `nom` text NOT NULL,
+  `nom` varchar(255) NOT NULL,
   `date_naissance` datetime NOT NULL,
-  `statut` text NOT NULL,
-  `region` text NOT NULL,
-  `sexe` text NOT NULL,
+  `statut` varchar(255) NOT NULL,
+  `region` varchar(255) NOT NULL,
+  `sexe` varchar(255) NOT NULL,
   `is_cni` tinyint(1) DEFAULT 0,
   `is_actenaissance` tinyint(1) DEFAULT 0,
   `is_autochtone` tinyint(1) DEFAULT 0,
@@ -502,7 +502,7 @@ INSERT INTO `PersonnesModel` (`id`, `nom`, `date_naissance`, `statut`, `region`,
 
 CREATE TABLE `quartiers` (
   `id` int(11) NOT NULL,
-  `libelle` text NOT NULL,
+  `libelle` varchar(255) NOT NULL,
   `idCommunes` int(11) NOT NULL,
   `createdAt` datetime NOT NULL,
   `updatedAt` datetime NOT NULL
@@ -547,7 +547,7 @@ INSERT INTO `residence` (`id`, `description`, `createdAt`, `updatedAt`, `idquart
 
 CREATE TABLE `roles` (
   `id` int(11) NOT NULL,
-  `libelle` text NOT NULL,
+  `libelle` varchar(255) NOT NULL,
   `createdAt` datetime NOT NULL,
   `updatedAt` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -568,8 +568,8 @@ INSERT INTO `roles` (`id`, `libelle`, `createdAt`, `updatedAt`) VALUES
 
 CREATE TABLE `utilisateurs` (
   `id` int(11) NOT NULL,
-  `username` text NOT NULL,
-  `password` text NOT NULL,
+  `username` varchar(255) NOT NULL,
+  `password` varchar(255) NOT NULL,
   `createdAt` datetime NOT NULL,
   `updatedAt` datetime NOT NULL,
   `idrole` int(11) NOT NULL
@@ -590,8 +590,8 @@ INSERT INTO `utilisateurs` (`id`, `username`, `password`, `createdAt`, `updatedA
 
 CREATE TABLE `vulnerabilite` (
   `id` int(11) NOT NULL,
-  `nom` text NOT NULL,
-  `description` text NOT NULL,
+  `nom` varchar(255) NOT NULL,
+  `description` varchar(255) NOT NULL,
   `createdAt` datetime NOT NULL,
   `updatedAt` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;

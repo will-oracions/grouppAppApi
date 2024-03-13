@@ -54,9 +54,9 @@ ResidenceModel.belongsTo(QuartiersModel, {
 });
 
 // Ensure the table is created and ready to use
-(async () => {
-  await sequelize.sync({ force: false });
-  // Additional code for initialization, if needed
-})();
+// (async () => {
+//   await sequelize.sync({ force: false });
+//   // Additional code for initialization, if needed
+// })();
 
 export default ResidenceModel;

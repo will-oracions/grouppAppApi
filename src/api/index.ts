@@ -42,7 +42,10 @@ connect()
       startApp();
     }
   })
-  .catch(() => logger.error(`Connexion échouée`));
+  .catch((error) => {
+    logger.error(`Connexion échouée`);
+    console.log(error.message);
+  });
 
 // Import des dépendances
 // import express, { Request, Response } from "express";
