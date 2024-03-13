@@ -26,7 +26,7 @@ connect()
       logger.info("Synchronisation avec la base de donnée ++++++++");
 
       sequelize
-        .sync({ force: true })
+        .sync({ force: false })
         .then(() => {
           logger.info("Base de données synchronisée avec succès");
           startApp();
