@@ -60,7 +60,7 @@ var password = req.body.password;
 if(username == null || password == null){
   return res.status(400).json({'error':'parametre manquants'})
 }
-loginuser(req.body).then(function(finduser){
+loginuser(req.body).then(function(finduser:any){
   if (finduser!=null){
     bcrypt.compare(password, finduser.password, function(errBycrypt, resBycrypt){
        if(resBycrypt){

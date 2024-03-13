@@ -18,7 +18,7 @@ export async function AddPersonne(
     }
     return res.status(200).json(data);
   } catch (e: any) {
-    console.log(e);
+    ;
     return res.status(409).send(e.message);
   }
 };
@@ -80,11 +80,9 @@ export async function getPersonneById(
   req: Request,
   res: Response
 ) {
-  console.log(req.params.id)
 
   getPersonnebyId(parseInt(req.params.id))
     .then(function (Personne) {
-      console.log(Personne);
       return res.status(201).json(Personne)
     })
     .catch(function (err) {

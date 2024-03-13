@@ -1,5 +1,6 @@
 import { Express } from "express";
 import { AddQuartier, deleteQuartier, getAllQuartier, getQuartierById, updateQuartier } from "../controller/quartiers.interface";
+const authentificationMiddleware = require("../middleware/authVerification");
 
 function quartiers(app: Express) {
 
@@ -14,7 +15,7 @@ function quartiers(app: Express) {
      *         200:
      *             description: all quartiers
      */
-    app.get('/api/quartiers', getAllQuartier)
+    app.get('/api/quartiers',authentificationMiddleware, getAllQuartier)
 
     /**
     * @swagger
@@ -34,7 +35,7 @@ function quartiers(app: Express) {
     *         200:
     *             description: Get quartiers by Id
     */
-    app.get('/api/quartiers/:id', getQuartierById)
+    app.get('/api/quartiers/:id',authentificationMiddleware, getQuartierById)
 
     /**
       * @swagger
@@ -69,7 +70,7 @@ function quartiers(app: Express) {
       *      400:
       *        description: Bad request
       */
-    app.put('/api/quartiers/:id', updateQuartier)
+    app.put('/api/quartiers/:id',authentificationMiddleware, updateQuartier)
     /**
 * @swagger
 * '/api/quartiers':
@@ -95,7 +96,7 @@ function quartiers(app: Express) {
 *      400:
 *        description: Bad request
 */
-    app.post('/api/quartiers', AddQuartier)
+    app.post('/api/quartiers',authentificationMiddleware, AddQuartier)
     /**
      * @swagger
      * '/api/quartiers/{id}':
@@ -114,7 +115,7 @@ function quartiers(app: Express) {
      *         200:
      *             description: Delete quartiers
      */
-    app.delete('/api/quartiers/:id', deleteQuartier)
+    app.delete('/api/quartiers/:id',authentificationMiddleware, deleteQuartier)
 
 }
 export default quartiers;

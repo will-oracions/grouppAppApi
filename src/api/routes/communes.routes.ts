@@ -1,6 +1,7 @@
 import { Express } from "express";
 import { getAllCommunes, getCommunesById, updateCommunes, AddCommunes, deleteCommunes, importCommunes } from "../controller/communes.controller";
 import multer from 'multer';
+const authentificationMiddleware = require("../middleware/authVerification");
 
 const upload = multer();
 function communes(app: Express) {
@@ -16,7 +17,7 @@ function communes(app: Express) {
      *         200:
      *             description: all communes
      */
-    app.get('/api/communes', getAllCommunes)
+    app.get('/api/communes',authentificationMiddleware, getAllCommunes)
 
 
     /**
@@ -37,7 +38,7 @@ function communes(app: Express) {
     *         200:
     *             description: Get communes by Id
     */
-    app.get('/api/communes/:id', getCommunesById)
+    app.get('/api/communes/:id',authentificationMiddleware, getCommunesById)
 
     /**
       * @swagger
@@ -72,7 +73,7 @@ function communes(app: Express) {
       *      400:
       *        description: Bad request
       */
-    app.put('/api/communes/:id', updateCommunes)
+    app.put('/api/communes/:id',authentificationMiddleware, updateCommunes)
     /**
 * @swagger
 * '/api/communes':
@@ -156,7 +157,7 @@ app.post('/api/upload/communes',upload.single('file'), importCommunes)
      *         200:
      *             description: Delete communes
      */
-    app.delete('/api/communes/:id', deleteCommunes)
+    app.delete('/api/communes/:id',authentificationMiddleware, deleteCommunes)
 
 }
 export default communes;

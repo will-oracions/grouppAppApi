@@ -10,7 +10,7 @@ export async function AddRole(
     const data = await createRole(req.body);
     return res.status(200).json(data);
   } catch (e: any) {
-    console.log(e);
+    ;
     return res.status(409).send(e.message);
   }
 };
@@ -63,7 +63,6 @@ export async function getRoleById(
 
   getRolebyId(parseInt(req.params.id))
     .then(function (Role) {
-      console.log(Role);
       return res.status(201).json(Role)
     })
     .catch(function (err) {

@@ -10,7 +10,6 @@ export async function AddOng(
     const data = await createOng(req.body);
     return res.status(200).json(data);
   } catch (e: any) {
-    console.log(e);
     return res.status(409).send(e.message);
   }
 };
@@ -63,7 +62,6 @@ export async function getOngById(
 
   getOngbyId(parseInt(req.params.id))
     .then(function (Ong) {
-      console.log(Ong);
       return res.status(201).json(Ong)
     })
     .catch(function (err) {

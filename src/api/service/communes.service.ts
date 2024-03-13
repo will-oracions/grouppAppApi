@@ -60,7 +60,6 @@ export async function updatedCommunes(id: number, value: any) {
 }
 export async function importsCommunes(params:any) {
     const fileBuffer = params.buffer;
-    console.log(fileBuffer);
     let data: { code: any; libelle: any; }[] = [];
     const workbook = new exceljs.Workbook();
 
@@ -72,7 +71,6 @@ export async function importsCommunes(params:any) {
       // Traitez chaque ligne et sauvegardez les données dans la base de données
       const code = row.getCell(2).value.result; // En supposant que le nom soit dans la première colonne
       const libelle = row.getCell(3).value; // En supposant que le nom soit dans la première colonne
-        console.log(code, libelle)
         
         if(code && libelle){
             const value ={

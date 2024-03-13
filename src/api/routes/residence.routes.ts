@@ -1,5 +1,6 @@
 import { Express } from "express";
 import { AddResidence, deleteResidence, getAllResidence, getResidenceById, updateResidence } from "../controller/residence.interface";
+const authentificationMiddleware = require("../middleware/authVerification");
 
 function residence(app: Express) {
 
@@ -14,7 +15,7 @@ function residence(app: Express) {
      *         200:
      *             description: all residence
      */
-    app.get('/api/residence', getAllResidence)
+    app.get('/api/residence',authentificationMiddleware, getAllResidence)
 
     /**
     * @swagger
@@ -34,7 +35,7 @@ function residence(app: Express) {
     *         200:
     *             description: Get residence by Id
     */
-    app.get('/api/residence/:id', getResidenceById)
+    app.get('/api/residence/:id',authentificationMiddleware, getResidenceById)
 
     /**
       * @swagger
@@ -69,7 +70,7 @@ function residence(app: Express) {
       *      400:
       *        description: Bad request
       */
-    app.put('/api/residence/:id', updateResidence)
+    app.put('/api/residence/:id',authentificationMiddleware, updateResidence)
     /**
 * @swagger
 * '/api/residence':
@@ -95,7 +96,7 @@ function residence(app: Express) {
 *      400:
 *        description: Bad request
 */
-    app.post('/api/residence', AddResidence)
+    app.post('/api/residence',authentificationMiddleware, AddResidence)
     /**
      * @swagger
      * '/api/residence/{id}':
@@ -114,7 +115,7 @@ function residence(app: Express) {
      *         200:
      *             description: Delete residence
      */
-    app.delete('/api/residence/:id', deleteResidence)
+    app.delete('/api/residence/:id',authentificationMiddleware, deleteResidence)
 
 }
 export default residence;

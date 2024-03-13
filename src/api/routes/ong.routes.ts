@@ -1,5 +1,6 @@
 import { Express } from "express";
 import { AddOng, deleteOng, getAllOng, getOngById, updateOng } from "../controller/ong.controller";
+const authentificationMiddleware = require("../middleware/authVerification");
 
 function ong(app: Express) {
 
@@ -14,7 +15,7 @@ function ong(app: Express) {
      *         200:
      *             description: all ong
      */
-    app.get('/api/ong', getAllOng)
+    app.get('/api/ong',authentificationMiddleware, getAllOng)
 
     /**
     * @swagger
@@ -34,7 +35,7 @@ function ong(app: Express) {
     *         200:
     *             description: Get ong by Id
     */
-    app.get('/api/ong/:id', getOngById)
+    app.get('/api/ong/:id',authentificationMiddleware, getOngById)
 
     /**
       * @swagger
@@ -69,7 +70,7 @@ function ong(app: Express) {
       *      400:
       *        description: Bad request
       */
-    app.put('/api/ong/:id', updateOng)
+    app.put('/api/ong/:id',authentificationMiddleware, updateOng)
     /**
 * @swagger
 * '/api/ong':
@@ -95,7 +96,7 @@ function ong(app: Express) {
 *      400:
 *        description: Bad request
 */
-    app.post('/api/ong', AddOng)
+    app.post('/api/ong',authentificationMiddleware, AddOng)
     /**
      * @swagger
      * '/api/ong/{id}':
@@ -114,7 +115,7 @@ function ong(app: Express) {
      *         200:
      *             description: Delete ong
      */
-    app.delete('/api/ong/:id', deleteOng)
+    app.delete('/api/ong/:id',authentificationMiddleware, deleteOng)
 
 }
 export default ong;

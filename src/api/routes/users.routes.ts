@@ -2,6 +2,8 @@ import { Express } from "express";
 import { Adduser,getUser, updateUser,deleteUser, getUserId,Login } from "../controller/user.controller";
 import validateResource from '../middleware/validateResource'
 import { createUserSchema, loginUserSchema } from "../schema/user.schema";
+const authentificationMiddleware = require("../middleware/authVerification");
+
 function users(app: Express){
   
  /**
@@ -15,7 +17,7 @@ function users(app: Express){
   *         200:
   *             description: all users
   */
- app.get('/api/users', getUser)
+ app.get('/api/users', authentificationMiddleware,getUser)
 
   /**
   * @swagger
@@ -35,7 +37,7 @@ function users(app: Express){
   *         200:
   *             description: Get user by Id
   */
-  app.get('/api/users/:id', getUserId)
+  app.get('/api/users/:id',authentificationMiddleware, getUserId)
      /**
    * @swagger
    * '/api/users':
@@ -61,7 +63,7 @@ function users(app: Express){
    *      400:
    *        description: Bad request
    */
- app.post('/api/users', validateResource(createUserSchema), Adduser)
+ app.post('/api/users',authentificationMiddleware, validateResource(createUserSchema), Adduser)
       /**
    * @swagger
    * '/api/login/users':
@@ -121,7 +123,7 @@ function users(app: Express){
    *      400:
    *        description: Bad request
    */
-  app.put('/api/users/:id', updateUser)
+  app.put('/api/users/:id',authentificationMiddleware, updateUser)
  /**
   * @swagger
   * '/api/users/{id}':
@@ -140,7 +142,7 @@ function users(app: Express){
   *         200:
   *             description: Delete users
   */
- app.delete('/api/users/:id', deleteUser)
+ app.delete('/api/users/:id',authentificationMiddleware, deleteUser)
 
 }
 export default users;

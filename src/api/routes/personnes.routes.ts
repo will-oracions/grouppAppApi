@@ -1,5 +1,6 @@
 import { Express } from "express";
 import { AddPersonne, deletePersonne, getAllPersonne, getAllPersonneChef, getPersonneById, updatePersonne } from "../controller/personne.controller";
+const authentificationMiddleware = require("../middleware/authVerification");
 
 function personnes(app: Express) {
 
@@ -14,7 +15,7 @@ function personnes(app: Express) {
      *         200:
      *             description: all personnes
      */
-    app.get('/api/personnes', getAllPersonne)
+    app.get('/api/personnes',authentificationMiddleware, getAllPersonne)
     
     /**
     * @swagger
@@ -34,7 +35,7 @@ function personnes(app: Express) {
     *         200:
     *             description: Get personnes by Id
     */
-    app.get('/api/personnes/:id', getPersonneById)
+    app.get('/api/personnes/:id',authentificationMiddleware, getPersonneById)
 
         /**
      * @swagger
@@ -47,7 +48,7 @@ function personnes(app: Express) {
      *         200:
      *             description: all personnes chef
      */
-        app.get('/api/chef/all/personnes', getAllPersonneChef)
+        app.get('/api/chef/all/personnes',authentificationMiddleware, getAllPersonneChef)
 
 
 
@@ -84,7 +85,7 @@ function personnes(app: Express) {
       *      400:
       *        description: Bad request
       */
-    app.put('/api/personnes/:id', updatePersonne)
+    app.put('/api/personnes/:id',authentificationMiddleware, updatePersonne)
     /**
 * @swagger
 * '/api/personnes':
@@ -110,7 +111,7 @@ function personnes(app: Express) {
 *      400:
 *        description: Bad request
 */
-    app.post('/api/personnes', AddPersonne)
+    app.post('/api/personnes',authentificationMiddleware, AddPersonne)
     /**
      * @swagger
      * '/api/personnes/{id}':
@@ -129,7 +130,7 @@ function personnes(app: Express) {
      *         200:
      *             description: Delete personnes
      */
-    app.delete('/api/personnes/:id', deletePersonne)
+    app.delete('/api/personnes/:id',authentificationMiddleware, deletePersonne)
 
 }
 export default personnes;

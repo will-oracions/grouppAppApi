@@ -1,6 +1,7 @@
 import { Sequelize, Model, DataTypes } from "sequelize";
 import { sequelize } from "../utils/connect";
 import UtilisateursModel from "./utilisateurs.model";
+const rolesToGenerate = ['administrateur', 'organisation', 'agents','ong'];
 
 interface RolesAttributes {
     id: number;
@@ -52,5 +53,23 @@ RolesModel.hasMany(UtilisateursModel, {
     await sequelize.sync({ force: false });
     // Additional code for initialization, if needed
 })();
-
+const generateRolesIfNotExist = async () => {
+    try {
+      // Pour chaque rôle à générer
+      for (const roleName of rolesToGenerate) {
+        // Recherchez le rôle dans la base de données
+        const existingRole = await RolesModel.findOne({ where: { libelle: roleName } });
+  
+        // Si le rôle n'existe pas, créez-le
+        if (!existingRole) {
+          await RolesModel.create({ id: 0,libelle: roleName });
+          console.log(`Le rôle "${roleName}" a été créé.`);
+        }
+      }
+      console.log('Génération des rôles terminée.');
+    } catch (error) {
+      console.error('Erreur lors de la génération des rôles :', error);
+    }
+  };
+  generateRolesIfNotExist();
 export default RolesModel;

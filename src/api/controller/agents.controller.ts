@@ -10,7 +10,6 @@ export async function AddAgents(
     const data = await createAgents(req.body);
     return res.status(200).json(data);
   } catch (e: any) {
-    console.log(e);
     return res.status(409).send(e.message);
   }
 };
@@ -63,7 +62,6 @@ export async function getAgentsById(
 
   getAgentsbyId(parseInt(req.params.id))
     .then(function (Agents) {
-      console.log(Agents);
       return res.status(201).json(Agents)
     })
     .catch(function (err) {

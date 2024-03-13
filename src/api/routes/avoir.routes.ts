@@ -1,5 +1,6 @@
 import { Express } from "express";
 import { AddAvoir, deleteAvoir, getAllAvoir, getAllState, updateAvoir } from "../controller/avoirvulnerabilite.controller";
+const authentificationMiddleware = require("../middleware/authVerification");
 
 function avoir(app: Express) {
 
@@ -14,7 +15,7 @@ function avoir(app: Express) {
      *         200:
      *             description: all avoir
      */
-    app.get('/api/avoir', getAllAvoir)
+    app.get('/api/avoir',authentificationMiddleware, getAllAvoir)
 
     
     /**
@@ -26,7 +27,7 @@ function avoir(app: Express) {
      *         200:
      *             description: Get statistique
      */
-    app.get('/api/state', getAllState)
+    app.get('/api/state',authentificationMiddleware, getAllState)
 
     /**
       * @swagger
@@ -61,7 +62,7 @@ function avoir(app: Express) {
       *      400:
       *        description: Bad request
       */
-    app.put('/api/avoir/:id', updateAvoir)
+    app.put('/api/avoir/:id',authentificationMiddleware, updateAvoir)
     /**
 * @swagger
 * '/api/avoir':
@@ -87,7 +88,7 @@ function avoir(app: Express) {
 *      400:
 *        description: Bad request
 */
-    app.post('/api/avoir', AddAvoir)
+    app.post('/api/avoir',authentificationMiddleware, AddAvoir)
     /**
      * @swagger
      * '/api/avoir/{id}':
@@ -106,7 +107,7 @@ function avoir(app: Express) {
      *         200:
      *             description: Delete avoir
      */
-    app.delete('/api/avoir/:id', deleteAvoir)
+    app.delete('/api/avoir/:id',authentificationMiddleware, deleteAvoir)
 
 }
 export default avoir;

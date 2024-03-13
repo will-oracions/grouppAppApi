@@ -10,7 +10,6 @@ export async function AddAvoir(
     const data = await createAvoir(req.body);
     return res.status(200).json(data);
   } catch (e: any) {
-    console.log(e);
     return res.status(409).send(e.message);
   }
 };

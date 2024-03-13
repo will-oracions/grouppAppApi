@@ -10,7 +10,6 @@ export async function AddCommunes(
     const data = await createCommunes(req.body);
     return res.status(200).json(data);
   } catch (e: any) {
-    console.log(e);
     return res.status(409).send(e.message);
   }
 };
@@ -63,7 +62,6 @@ export async function getCommunesById(
 
   getCommunesbyId(parseInt(req.params.id))
     .then(function (Communes) {
-      console.log(Communes);
       return res.status(201).json(Communes)
     })
     .catch(function (err) {

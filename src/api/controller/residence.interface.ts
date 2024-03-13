@@ -10,7 +10,7 @@ export async function AddResidence(
     const data = await createResidence(req.body);
     return res.status(200).json(data);
   } catch (e: any) {
-    console.log(e);
+    ;
     return res.status(409).send(e.message);
   }
 };
@@ -63,7 +63,6 @@ export async function getResidenceById(
 
   getResidencebyId(parseInt(req.params.id))
     .then(function (Residence) {
-      console.log(Residence);
       return res.status(201).json(Residence)
     })
     .catch(function (err) {

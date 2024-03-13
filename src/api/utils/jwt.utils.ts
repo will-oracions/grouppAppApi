@@ -5,7 +5,8 @@ module.exports = {
     generateTokenUser: function(userData:any){
         return jwt.sign({
             UserId: userData.id,
-            Email: userData.email
+            Email: userData.email,
+            role: userData.role.libelle
         },
         JWT8_SIGN_SECRET)
     }

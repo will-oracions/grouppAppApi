@@ -1,5 +1,6 @@
 import { Express } from "express";
 import { AddAgents, deleteAgents, getAgentsById, getAllAgents, updateAgents } from "../controller/agents.controller";
+const authentificationMiddleware = require("../middleware/authVerification");
 
  function agents(app: Express) {
 
@@ -14,7 +15,7 @@ import { AddAgents, deleteAgents, getAgentsById, getAllAgents, updateAgents } fr
      *         200:
      *             description: all agents
      */
-    app.get('/api/agents', getAllAgents)
+    app.get('/api/agents',authentificationMiddleware, getAllAgents)
 
     /**
     * @swagger
@@ -34,7 +35,7 @@ import { AddAgents, deleteAgents, getAgentsById, getAllAgents, updateAgents } fr
     *         200:
     *             description: Get agents by Id
     */
-    app.get('/api/agents/:id', getAgentsById)
+    app.get('/api/agents/:id',authentificationMiddleware, getAgentsById)
 
     /**
       * @swagger
@@ -69,7 +70,7 @@ import { AddAgents, deleteAgents, getAgentsById, getAllAgents, updateAgents } fr
       *      400:
       *        description: Bad request
       */
-    app.put('/api/agents/:id', updateAgents)
+    app.put('/api/agents/:id',authentificationMiddleware, updateAgents)
     /**
 * @swagger
 * '/api/agents':
@@ -95,7 +96,7 @@ import { AddAgents, deleteAgents, getAgentsById, getAllAgents, updateAgents } fr
 *      400:
 *        description: Bad request
 */
-    app.post('/api/agents', AddAgents)
+    app.post('/api/agents',authentificationMiddleware, AddAgents)
     /**
      * @swagger
      * '/api/agents/{id}':
@@ -114,7 +115,7 @@ import { AddAgents, deleteAgents, getAgentsById, getAllAgents, updateAgents } fr
      *         200:
      *             description: Delete agents
      */
-    app.delete('/api/agents/:id', deleteAgents)
+    app.delete('/api/agents/:id',authentificationMiddleware, deleteAgents)
 
 }
 export default agents;

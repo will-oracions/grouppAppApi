@@ -3,6 +3,7 @@ import { Request, Response } from "express";
 import { omit } from "lodash";
 import { loginInterface, UserInterface } from "../interface/user.interface";
 import UtilisateursModel from "../models/utilisateurs.model";
+import RolesModel from "../models/roles.models";
 
 export async function createuser(value:UserInterface) {
         console.log(value);
@@ -16,7 +17,10 @@ export async function createuser(value:UserInterface) {
 }
 export async function loginuser(value:loginInterface) {
     const finduser= UtilisateursModel.findOne({
-    where: {username: value.username}
+    where: {username: value.username},
+    include:[{
+        model: RolesModel
+    }]
 })
     return finduser;
 }

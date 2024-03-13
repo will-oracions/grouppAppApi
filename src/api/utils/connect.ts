@@ -4,9 +4,8 @@ const { Sequelize } = require('sequelize');
 import mysql2  from "mysql2"
 
 
-export const sequelize = new Sequelize('u877916646_groupApp', 'u877916646_username', 'grouppApp@12', {
-  host: 'srv915.hstgr.io',
-  port: '3306',
+export const sequelize = new Sequelize('u877916646_groupApp', 'root', '', {
+  host: 'localhost',
   dialect: 'mysql',
   dialectModule: mysql2,
   pool: {
@@ -45,7 +44,6 @@ const connect =async ()=>{
  
       try {
        await sequelize.authenticate();
-       console.log('Connexion a la base de donnée .');
       } catch (error) {
         console.log('Unable to connect to the database:', error);
       }
