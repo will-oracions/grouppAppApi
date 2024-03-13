@@ -1,5 +1,5 @@
 import { Model, DataTypes } from "sequelize";
-import { sequelize } from "../utils/sequelize";
+import { sequelize } from "../utils/database/sequelize";
 
 interface UtilisateursAttributes {
   id: number;
@@ -45,9 +45,9 @@ UtilisateursModel.init(
 );
 
 // Ensure the table is created and ready to use
-(async () => {
-  await sequelize.sync({ force: false });
-  // Additional code for initialization, if needed
-})();
+// (async () => {
+//   await sequelize.sync({ force: false });
+//   // Additional code for initialization, if needed
+// })();
 
 export default UtilisateursModel;

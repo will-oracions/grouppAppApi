@@ -1,5 +1,6 @@
 const { Sequelize } = require("sequelize");
-import mysql2 from "mysql2";
+// import mysql2 from "mysql2";
+
 import env from "../../../../config/env";
 
 // export const sequelize = new Sequelize(
@@ -44,4 +45,6 @@ import env from "../../../../config/env";
 //   }
 // );
 
-export const sequelize = new Sequelize(env.DATABASE_URL);
+export const sequelize = new Sequelize(env.DATABASE_URL, {
+  logging: false,
+});

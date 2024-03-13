@@ -5,6 +5,8 @@ import { sequelize } from "./database/sequelize";
 const databaseConfig = `
 
 DATABASE_URL=${env.DATABASE_URL}
+DATABASE_LOGGING=${env.DATABASE_LOGGING}
+DATABASE_SYNC=${env.DATABASE_SYNC}
 
 `;
 // DATABASE_PROVIDER=${env.DATABASE_PROVIDER}

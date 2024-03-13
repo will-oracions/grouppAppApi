@@ -1,5 +1,5 @@
 import { Model, DataTypes } from "sequelize";
-import { sequelize } from "../utils/sequelize";
+import { sequelize } from "../utils/database/sequelize";
 
 interface QuartiersAttributes {
   id: number;
@@ -29,7 +29,7 @@ QuartiersModel.init(
       allowNull: false,
     },
     idCommunes: {
-      type: DataTypes.STRING,
+      type: DataTypes.INTEGER,
       allowNull: false,
     },
   },
@@ -42,9 +42,9 @@ QuartiersModel.init(
 );
 
 // Ensure the table is created and ready to use
-(async () => {
-  await sequelize.sync({ force: false });
-  // Additional code for initialization, if needed
-})();
+// (async () => {
+//   await sequelize.sync({ force: false });
+//   // Additional code for initialization, if needed
+// })();
 
 export default QuartiersModel;

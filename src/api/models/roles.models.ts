@@ -1,5 +1,6 @@
 import { Sequelize, Model, DataTypes } from "sequelize";
-import { sequelize } from "../utils/sequelize";
+import { sequelize } from "../utils/database/sequelize";
+
 import UtilisateursModel from "./utilisateurs.model";
 
 interface RolesAttributes {
@@ -48,9 +49,9 @@ UtilisateursModel.belongsTo(RolesModel, {
   },
 });
 // Ensure the table is created and ready to use
-(async () => {
-  await sequelize.sync({ force: false });
-  // Additional code for initialization, if needed
-})();
+// (async () => {
+//   await sequelize.sync({ force: false });
+//   // Additional code for initialization, if needed
+// })();
 
 export default RolesModel;

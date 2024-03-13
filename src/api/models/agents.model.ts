@@ -1,4 +1,4 @@
-import { sequelize } from "../utils/sequelize";
+import { sequelize } from "../utils/database/sequelize";
 
 const { Model, DataTypes } = require("sequelize");
 
@@ -27,9 +27,10 @@ const AgentsModel = sequelize.define(
   }
 );
 
-(async () => {
-  await sequelize.sync({ force: false });
-  // Code here
-})();
+// (async () => {
+//   await sequelize.sync({ force: false });
+//   // Code here
+// })();
+
 module.exports = AgentsModel;
 export default AgentsModel;

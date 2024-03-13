@@ -1,7 +1,7 @@
 import AvoirVulnerabilite from "./avoirvulnerabilite.model";
 import ResidenceModel from "./residence.model";
 import { Sequelize, Model, DataTypes } from "sequelize";
-import { sequelize } from "../utils/sequelize";
+import { sequelize } from "../utils/database/sequelize";
 
 class PersonnesModel extends Model {}
 
@@ -84,9 +84,9 @@ PersonnesModel.belongsTo(PersonnesModel, {
 PersonnesModel.hasMany(AvoirVulnerabilite, { foreignKey: "idPer" });
 AvoirVulnerabilite.belongsTo(PersonnesModel, { foreignKey: "idPer" });
 
-(async () => {
-  await sequelize.sync({ force: false });
-  // Code here
-})();
+// (async () => {
+//   await sequelize.sync({ force: false });
+//   // Code here
+// })();
 
 export default PersonnesModel;

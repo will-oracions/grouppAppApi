@@ -1,6 +1,6 @@
 import QuartiersModel from "./quartiers.model";
 import { Model, DataTypes } from "sequelize";
-import { sequelize } from "../utils/sequelize";
+import { sequelize } from "../utils/database/sequelize";
 
 interface CommunesAttributes {
   id: number;
@@ -51,16 +51,18 @@ CommunesModel.hasMany(QuartiersModel, {
     allowNull: false,
   },
 });
+
 QuartiersModel.belongsTo(CommunesModel, {
   foreignKey: {
     name: "idCommunes",
     allowNull: false,
   },
 });
+
 // Ensure the table is created and ready to use
-(async () => {
-  await sequelize.sync({ force: false });
-  // Additional code for initialization, if needed
-})();
+// (async () => {
+//   await sequelize.sync({ force: false });
+//   // Additional code for initialization, if needed
+// })();
 
 export default CommunesModel;
